@@ -22,7 +22,7 @@ export default {
         async addContact(data) {
             try {
                 await notesService.create(data);
-                this.message = "Liên hệ được tạo mới thành công.";
+                this.message = "Ghi chú được tạo mới thành công.";
             } catch (error) {
                 console.log(error);
             }

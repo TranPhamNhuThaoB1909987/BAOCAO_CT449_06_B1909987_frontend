@@ -1,6 +1,7 @@
 <template>
     <Form @submit="SignIn">
         <div class="form-group">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShmghVaF4Wa87EiJ30rqhwx81O6O5kYTc2P6gqVfGKzJ3rEy_TxIs6W5WCcdiJk3IIfhc&usqp=CAU ">
             <label for="email">E-mail</label>
             <Field name="email" type="email" class="form-control" v-model="userLocal.email" />
             <ErrorMessage name="email" class="error-feedback" />
@@ -50,4 +51,5 @@ export default {
 </script>
 <style scoped>
     @import "@/assets/form.css";
+    @import "@/assets/main.css";
 </style>
