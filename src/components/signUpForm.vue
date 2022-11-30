@@ -1,5 +1,5 @@
 <template>
-    <Form @submit="SignUp">
+    <Form @submit="SignUp" :validation-schema="dangky_form">
         <div class="form-group">
             <label for="email">E-mail</label>
             <Field name="email" type="email" class="form-control" v-model="userLocal.email" />
@@ -38,8 +38,23 @@ export default {
         user: { type: Object, required: true }
     },
     data() {
+        const dangky_form = yup.object({
+            email:yup
+                .string().required("Email không được để trống !")
+                .email("Email không chính xác !")
+                .max(50,"Email có tối đa 50 ký tự !"),
+            password:yup
+                .string()
+                .required("Mật khẩu không được để trống !")
+                .min(4,"Mật khẩu tối thiểu 4 ký tự !"),
+            confirmPassword:yup
+                .string()
+                .required("Mật khẩu không được để trống !")
+                .min(4,"Mật khẩu tối thiểu 4 ký tự !")
+        })
         return {
             userLocal: this.user,
+            dangky_form,
         };
     },
     methods: {

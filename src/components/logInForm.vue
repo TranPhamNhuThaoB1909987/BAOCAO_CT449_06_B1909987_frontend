@@ -1,5 +1,5 @@
 <template>
-    <Form @submit="SignIn">
+    <Form @submit="SignIn" :validation-schema="dangnhap_form">
         <div class="form-group">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShmghVaF4Wa87EiJ30rqhwx81O6O5kYTc2P6gqVfGKzJ3rEy_TxIs6W5WCcdiJk3IIfhc&usqp=CAU ">
             <label for="email">E-mail</label>
@@ -19,7 +19,6 @@
         </div>
     </Form>
 </template>
-
 <script>
 import * as yup from "yup";
 import { Form, Field, ErrorMessage } from "vee-validate";
@@ -34,8 +33,19 @@ export default {
         user: { type: Object, required: true }
     },
     data() {
+        const dangnhap_form = yup.object({
+            email:yup
+                .string().required("Email không được để trống !")
+                .email("Email không chính xác !")
+                .max(50,"Email tối đa 50 ký tự !"),
+            password:yup
+                .string()
+                .required("Mật khẩu không được để trống !")
+                .min(4,"Mật khẩu tối thiểu 4 ký tự !")
+        })
         return {
             userLocal: this.user,
+            dangnhap_form,
         };
     },
     methods: {

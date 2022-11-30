@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import registerForm from "@/components/registerForm.vue";
+import registerForm from "@/components/signUpForm.vue";
 import userService from "@/services/user.service";
 export default {
     components: {
@@ -21,10 +21,11 @@ export default {
     methods: {
         async signUp(data) {
             try {
-                await userService.create(data);
-                this.message = "Đăng ký thành công.";
-                // this.$router.push({ name: "user" });
-            } catch (error) {
+                    if(data.password == data.confirmPassword){
+                        await userService.create(data);
+                        this.message = "Đăng ký thành công.";
+                    }else this.message= "Xác nhận lại mật khẩu không đúng";
+                } catch (error) {
                 console.log(error);
             }
         },

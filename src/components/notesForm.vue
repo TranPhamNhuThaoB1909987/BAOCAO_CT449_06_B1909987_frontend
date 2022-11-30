@@ -1,5 +1,5 @@
 <template>
-    <Form @submit="submitNote">
+    <Form @submit="submitNote" :validation-schema="addnote_form">
         <div class="form-group">
             <label for="title">Tiêu Đề</label>
             <Field name="title" type="text" class="form-control" v-model="noteLocal.title" />
@@ -39,17 +39,20 @@ export default {
         note: { type: Object, required: true }
     },
     data() {
-        const contactFormSchema = yup.object().shape({
+        const addnote_form = yup.object().shape({
             title: yup
                 .string()
-                .required("Tiêu đề phải có giá trị.")
+                .required("Tiêu đề không được trống !")
                 .min(2, "Tiêu đề phải ít nhất 2 ký tự.")
                 .max(50, "Tiêu đề có nhiều nhất 50 ký tự."),
-            content: yup.string()
+            content: yup
+                .string()
+                .required("Nội dung không được trống !")
                 .min(10, "Nội dung tối thiểu 10 ký tự."),
         });
         return {
             noteLocal: this.note,
+            addnote_form,
         };
     },
     methods: {
